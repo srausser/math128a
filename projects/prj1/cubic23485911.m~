@@ -2,7 +2,7 @@ function [rts,info] = cubic23485911(C)
 %project 1 
 %   Want to find roots of cubic polynomial
 %   https://math.berkeley.edu/~mgu/MA128A2015S/Prog1.pdf
-% func = poly2sym(C);
+func = poly2sym(C);
 % disp(func);
 
 a = C(1);
@@ -14,7 +14,10 @@ N0 = 10^6;
 p0 = -2;
 p1 = 2;
 p2 = 0;
+
+% if (a == 0 && b == 0 && c == 0)
     
+
 if (a == 0)
     if (b == 0)
         if (c == 0)
@@ -35,8 +38,8 @@ end
 % step1:    
 h1 = p1 - p0; 
 h2 = p2 - p1;
-delta1 = (polyval(C, p1) - polyval(C, p0))/h1; 
-delta2 = (polyval(C, p2) - polyval(C, p1))/h2; 
+delta1 = (func(p1) - func(p0))/h1; 
+delta2 = (func(p2) - func(p1))/h2; 
 d = (delta2 - delta1)/(h2 + h1);
 i = 3;
 
@@ -44,7 +47,7 @@ i = 3;
 while (i <= N0) % do Steps 3-7
 	% step 3
     b = delta2 + h2 * d;
-    D = (b^2 -4*polyval(C, p2)*d)^(1/2);
+    D = (b^2 -4*func(p2)*d)^(1/2);
 
 	% step 4	
     if (abs(b - D) < abs(b + D))
@@ -54,7 +57,7 @@ while (i <= N0) % do Steps 3-7
     end
 
 	% step 5
-    h = -2*polyval(C, p2)/E;
+    h = -2*func(p2)/E;
 	p = p2 + h;
     
 	% step 6
@@ -69,21 +72,25 @@ while (i <= N0) % do Steps 3-7
     p2 = p;
 	h1 = p1 - p0;
 	h2 = p2 - p1;
-	delta1 = (polyval(C, p1) - polyval(C, p0))/h1;
-	delta2 = (polyval(C, p2) - polyval(C, p1))/h2;
+	delta1 = (func(p1) - func(p0))/h1;
+	delta2 = (func(p2) - func(p1))/h2;
 	d = (delta1 - delta2)/(h2 + h1);
 	i = i + 1;
 end
-
 b = [1 rts(1)];
-[q, r] = deconv(C,b);
-disp(r);
-a = q(1);
-b = q(2);
-c = q(3);
-rts(2) = (-b + sqrt(b^2 - 4*a*c))/(2*a);
-rts(3) = (-b - sqrt(b^2 - 4*a*c))/(2*a);
-info = sprintf('three roots located at %d, %d, and %d', rts(1), rts(2), rts(3));
-return;
+[q, r] = deconv(C,b)
+
+
+
 end
+
+
+
+
+
+
+
+
+
+
 
