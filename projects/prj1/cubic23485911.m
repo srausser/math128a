@@ -9,19 +9,20 @@ a = C(1);
 b = C(2);
 c = C(3);
 d = C(4);
-TOL = 10^(-6);
-N0 = 10^6;
-p0 = -2;
-p1 = 2;
-p2 = 0;
+TOL = 10^(-14);
+N0 = 10^3;
+% disp(C);
     
-if (a == 0)
-    if (b == 0)
-        if (c == 0)
+if (abs(a) == 0)
+    if (abs(b) == 0)
+        if (abs(c) == 0)
             info = sprintf('no roots as polynomial entered is constant on R');
+            rts(1) = nan;
+            return;
         end
         rts(1) = -d/c;
         info = sprintf('one root located at %d', rts(1));
+        return;
     end
     a = C(2);
     b = C(3);
@@ -31,7 +32,52 @@ if (a == 0)
     info = sprintf('two roots located at %d and %d', rts(1), rts(2));
     return;
 end
-    
+
+% der = polyder(C);
+% ader = der(1);
+% bder = der(2);
+% cder = der(3);
+% r1der = (-bder + sqrt(bder^2 - 4*ader*cder))/(2*ader);
+% r2der = (-bder - sqrt(bder^2 - 4*ader*cder))/(2*ader);
+
+% if (isreal(r1der) && isreal(r2der)) %if not true then only one real root
+%     p0 = -1000;
+%     p1 = 1000;
+%     p2 = 0;
+% elseif (a > 0)
+%     p0 = -1000;
+%     p1 = 100;
+%     p2 = -450;
+% else
+%     p0 = -100;
+%     p1 = 1000;
+%     p2 = 450;
+% end
+
+randoms = randn(1,3);
+% randoms = [-2, 0, 2];
+
+while (polyval(C, randoms(2)) - polyval(C, randoms(1)) == 0 || polyval(C, randoms(3)) - polyval(C, randoms(2)) == 0 || polyval(C, randoms(3)) - polyval(C, randoms(1)) == 0)
+    randoms = 2*randoms;
+end
+
+% while (polyval(C, randoms(3)) - polyval(C, randoms(2)) == 0)
+%     randoms = 2*randoms;
+% end
+% 
+% while (polyval(C, randoms(3)) - polyval(C, randoms(1)) == 0)
+%     randoms = 2*randoms;
+% end
+
+% disp(randoms);
+
+p0 = randoms(1);
+p1 = randoms(2);
+p2 = randoms(3);
+
+
+
+
 % step1:    
 h1 = p1 - p0; 
 h2 = p2 - p1;
@@ -75,9 +121,16 @@ while (i <= N0) % do Steps 3-7
 	i = i + 1;
 end
 
-b = [1 rts(1)];
+disp(i);
+if (not(exist('rts', 'var')))
+%     disp('                          not exists');
+    [rts,info] = cubic23485911(C);
+    return;
+end
+
+b = [1 -rts(1)];
 [q, r] = deconv(C,b);
-disp(r);
+% disp(r);
 a = q(1);
 b = q(2);
 c = q(3);
