@@ -43,8 +43,8 @@ for i=1:n
         disp(rrts);
         disp('   Errors:');
         disp(errs);
-%         disp('   Inputs:');
-%         disp(coeff);
+        disp('   Inputs:');
+        disp(coeff);
     else
         disp('  Test passed.');
     end
@@ -87,6 +87,9 @@ for i=1:n
         disp(rrts);
         disp('   Errors:');
         disp(errs);
+        disp('   Inputs:');
+        disp(coeff);
+
     else
         disp('  Test passed.');
     end
