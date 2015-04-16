@@ -1,12 +1,4 @@
-function [Tout,Xout,DXout,info] = RKF23485911(T0,Tfinal,X0,DX0,tol,A,Mu,omega)
-
-funcs = @vdpode;
-
-[Tout,Xout,DXout,info] = RKFv(funcs, )
-    
-
-
-function [w,t,flg] = RKFv(FunFcnIn, Intv, alpha, tol, stepsize)
+function [w,t,flg] = RKFv_test(Intv, alpha, tol, stepsize)
 % On input: 
 %   FunFcnIn is the name of function to be integrated
 %   interv is the interval to be integrated over
@@ -29,10 +21,10 @@ function [w,t,flg] = RKFv(FunFcnIn, Intv, alpha, tol, stepsize)
 %
 % Written by Ming Gu for Math 128A, Fall 2008
 % 
-[FunFcn,msg] = fcnchk(FunFcnIn,0);
-if ~isempty(msg)
-    error('InvalidFUN',msg);
-end
+% [FunFcn,msg] = fcnchk(FunFcnIn,0);
+% if ~isempty(msg)
+%     error('InvalidFUN',msg);
+% end
 flg  = 0;
 a    = Intv(1);
 b    = Intv(2);
@@ -62,7 +54,7 @@ while (flg == 0)
     ti   = t(end);
     wi   = w(:,end);
     for j = 1:6
-        K(:,j) = h*FunFcn(ti+c(j)*h,wi+K(:,1:5)*KC(j,:)');
+        K(:,j) = h*vdpode_test(ti+c(j)*h,wi+K(:,1:5)*KC(j,:)');
     end
 %
 % accept approximation
@@ -87,11 +79,3 @@ while (flg == 0)
         return;
     end
 end
-
-
-function f = vdpode(t,y)
-f = [ y(2); A*sin(omega*t) - y(1) - Mu*(y(1)^2 - 1)*y(2) ];
-end
-
-end
-
