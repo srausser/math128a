@@ -1,0 +1,435 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>HW #8</title><meta name="generator" content="MATLAB 8.3"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2015-03-17"><meta name="DC.source" content="hw8out.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>HW #8</h1><!--introduction--><pre>Sam Rausser
+23485911
+3/17/15</pre><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">4.6</a></li><li><a href="#2">4d)</a></li><li><a href="#3">5b)</a></li><li><a href="#4">6b)</a></li><li><a href="#5">7)</a></li><li><a href="#6">8a)</a></li><li><a href="#7">4.7</a></li><li><a href="#8">1b)</a></li><li><a href="#9">2b)</a></li></ul></div><h2>4.6<a name="1"></a></h2><h2>4d)<a name="2"></a></h2><pre class="codeinput">fun = @(x) exp(x).*(6*cos(4*x)+4*sin(6*x))
+[Int,flg,fcnt,level] = AdaptSimpson(fun, [0, pi/2], 0.00001, 100)
+clear
+</pre><pre class="codeoutput">
+fun = 
+
+    @(x)exp(x).*(6*cos(4*x)+4*sin(6*x))
+
+
+Int =
+
+    5.1138
+
+
+flg =
+
+     0
+
+
+fcnt =
+
+   121
+
+
+level =
+
+     6
+
+</pre><h2>5b)<a name="3"></a></h2><pre class="codeinput">fun = @(x) x.*sin(x.^2);
+q = integral(fun, 0, pi);
+n = 5;
+<span class="keyword">while</span>(abs(q - CompSimpson(fun, n, [0 , pi])) &gt; 0.000001)
+    n = n + 2;
+<span class="keyword">end</span>
+n
+[Int,flg,fcnt,level] = AdaptSimpson(fun, [0 , pi], 0.000001, 10)
+clear
+</pre><pre class="codeoutput">
+n =
+
+   147
+
+
+Int =
+
+    0.9513
+
+
+flg =
+
+     0
+
+
+fcnt =
+
+   205
+
+
+level =
+
+     8
+
+</pre><h2>6b)<a name="4"></a></h2><pre class="codeinput">x = 0.1:pi/100:2;
+y = cos(1./x);
+<span class="comment">% figure</span>
+<span class="comment">% plot(x, y)</span>
+y = @(x) cos(1./x);
+[Int,flg,fcnt,level] = AdaptSimpson(y, [0.1, 2], .001, 10)
+clear
+</pre><pre class="codeoutput">
+Int =
+
+    0.6738
+
+
+flg =
+
+     0
+
+
+fcnt =
+
+    29
+
+
+level =
+
+     7
+
+</pre><h2>7)<a name="5"></a></h2><pre class="codeinput">m = 1;
+k = 9;
+F_0 = 1;
+w = 2;
+w_0 = sqrt(k/m);
+<span class="comment">% t = 0:pi/20:2*pi</span>
+<span class="comment">% y = F_0/(m*(w_0^2-w^2)).*(cos(w*t)-cos(w_0*t))</span>
+<span class="comment">% plot(t, y)</span>
+u = @(t) F_0/(m*(w_0^2-w^2)).*(cos(w*t)-cos(w_0*t));
+[Int,flg,fcnt,level] = AdaptSimpson(u, [0, 2*pi], .0001, 10)
+clear
+</pre><pre class="codeoutput">
+Int =
+
+  -2.2204e-16
+
+
+flg =
+
+     0
+
+
+fcnt =
+
+    65
+
+
+level =
+
+     5
+
+</pre><h2>8a)<a name="6"></a></h2><pre class="codeinput">m = 1;
+k = 9;
+F_0 = 1;
+c = 10;
+w = 2;
+w_0 = sqrt(k/m);
+r_1 = (-c+sqrt(c^2-4*w_0^2*m^2))/2*m;
+r_2 = (-c-sqrt(c^2-4*w_0^2*m^2))/2*m;
+syms <span class="string">c_1</span> <span class="string">c_2</span> <span class="string">t</span>
+u =  c_1*exp(r_1*t) + c_2*exp(r_2*t) + (F_0/(c^2*w^2+m^2*(w_0^2-w^2)^2)).*(c*w*sin(w*t)+m*(w_0^2-w^2)*cos(w*t))
+diff_u = diff(u)
+u_0 = vpa(subs(u, t, 0))
+diff_u_0 = vpa(subs(diff_u, t, 0))
+<span class="comment">% c_1 = solve(u_0 == 0)</span>
+c_1 = -1/40;
+c_2 = 9/680;
+u = @(t) c_1*exp(r_1*t) + c_2*exp(r_2*t) + (F_0/(c^2*w^2+m^2*(w_0^2-w^2)^2)).*(c*w*sin(w*t)+m*(w_0^2-w^2)*cos(w*t))
+[Int,flg,fcnt,level] = AdaptSimpson(u, [0, 2*pi], 0.0001, 10)
+clear
+</pre><pre class="codeoutput"> 
+u =
+ 
+cos(2*t)/85 + (4*sin(2*t))/85 + c_1*exp(-t) + c_2*exp(-9*t)
+ 
+ 
+diff_u =
+ 
+(8*cos(2*t))/85 - (2*sin(2*t))/85 - c_1*exp(-t) - 9*c_2*exp(-9*t)
+ 
+ 
+u_0 =
+ 
+c_1 + c_2 + 0.011764705882352941176470588235294
+ 
+ 
+diff_u_0 =
+ 
+0.094117647058823529411764705882353 - 9.0*c_2 - 1.0*c_1
+ 
+
+u = 
+
+    @(t)c_1*exp(r_1*t)+c_2*exp(r_2*t)+(F_0/(c^2*w^2+m^2*(w_0^2-w^2)^2)).*(c*w*sin(w*t)+m*(w_0^2-w^2)*cos(w*t))
+
+
+Int =
+
+   -0.0235
+
+
+flg =
+
+     0
+
+
+fcnt =
+
+    37
+
+
+level =
+
+     5
+
+</pre><h2>4.7<a name="7"></a></h2><h2>1b)<a name="8"></a></h2><pre class="codeinput">a = 0;
+b = 1;
+syms <span class="string">t</span> <span class="string">x</span>
+f = @(x) (x.^2).*exp(-1*x);
+actual = int(f, x, a, b)
+x = (t+1)/2;
+<span class="comment">% dx = 1/2 * dt;</span>
+[c,x_val] = Legendre(2)
+ans = vpa((1/2) * (c(1) * subs(f(x), t, x_val(1)) + c(2) * subs(f(x), t, x_val(2))))
+diff = vpa(abs(actual - ans))
+clear
+</pre><pre class="codeoutput"> 
+actual =
+ 
+2 - 5*exp(-1)
+ 
+
+c =
+
+    1.0000
+    1.0000
+
+
+x_val =
+
+   -0.5774
+    0.5774
+
+ 
+ans =
+ 
+0.15941043096637894599613928452297
+ 
+ 
+diff =
+ 
+0.0011923631764094460262418646697296
+ 
+</pre><h2>2b)<a name="9"></a></h2><pre class="codeinput">a = 0;
+b = 1;
+syms <span class="string">t</span> <span class="string">x</span>
+f = @(x) (x.^2).*exp(-1*x);
+actual = int(f, x, a, b)
+x = (t+1)/2;
+<span class="comment">% dx = 1/2 * dt;</span>
+[c,x_val] = Legendre(3)
+ans = vpa((1/2) * (c(1) * subs(f(x), t, x_val(1)) + c(2) * subs(f(x), t, x_val(2)) + c(3) * subs(f(x), t, x_val(3))))
+diff = vpa(abs(actual - ans))
+clear
+</pre><pre class="codeoutput"> 
+actual =
+ 
+2 - 5*exp(-1)
+ 
+
+c =
+
+    0.5556
+    0.8889
+    0.5556
+
+
+x_val =
+
+   -0.7746
+         0
+    0.7746
+
+ 
+ans =
+ 
+0.16059538680891924572776499743668
+ 
+ 
+diff =
+ 
+0.0000074073338691462946161517560162053
+ 
+</pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2014a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% HW #8
+%  Sam Rausser
+%  23485911
+%  3/17/15
+
+%% 4.6
+%% 4d)
+fun = @(x) exp(x).*(6*cos(4*x)+4*sin(6*x))
+[Int,flg,fcnt,level] = AdaptSimpson(fun, [0, pi/2], 0.00001, 100)
+clear
+
+%% 5b)
+fun = @(x) x.*sin(x.^2);
+q = integral(fun, 0, pi);
+n = 5;
+while(abs(q - CompSimpson(fun, n, [0 , pi])) > 0.000001)
+    n = n + 2;
+end
+n
+[Int,flg,fcnt,level] = AdaptSimpson(fun, [0 , pi], 0.000001, 10)
+clear
+
+%% 6b)
+
+x = 0.1:pi/100:2;
+y = cos(1./x);
+% figure
+% plot(x, y)
+y = @(x) cos(1./x);
+[Int,flg,fcnt,level] = AdaptSimpson(y, [0.1, 2], .001, 10)
+clear
+
+%% 7)
+m = 1;
+k = 9;
+F_0 = 1;
+w = 2;
+w_0 = sqrt(k/m);
+% t = 0:pi/20:2*pi
+% y = F_0/(m*(w_0^2-w^2)).*(cos(w*t)-cos(w_0*t))
+% plot(t, y)
+u = @(t) F_0/(m*(w_0^2-w^2)).*(cos(w*t)-cos(w_0*t));
+[Int,flg,fcnt,level] = AdaptSimpson(u, [0, 2*pi], .0001, 10)
+clear
+
+
+%% 8a)
+m = 1;
+k = 9;
+F_0 = 1;
+c = 10;
+w = 2;
+w_0 = sqrt(k/m);
+r_1 = (-c+sqrt(c^2-4*w_0^2*m^2))/2*m;
+r_2 = (-c-sqrt(c^2-4*w_0^2*m^2))/2*m;
+syms c_1 c_2 t
+u =  c_1*exp(r_1*t) + c_2*exp(r_2*t) + (F_0/(c^2*w^2+m^2*(w_0^2-w^2)^2)).*(c*w*sin(w*t)+m*(w_0^2-w^2)*cos(w*t))
+diff_u = diff(u)
+u_0 = vpa(subs(u, t, 0))
+diff_u_0 = vpa(subs(diff_u, t, 0))
+% c_1 = solve(u_0 == 0) 
+c_1 = -1/40;
+c_2 = 9/680;
+u = @(t) c_1*exp(r_1*t) + c_2*exp(r_2*t) + (F_0/(c^2*w^2+m^2*(w_0^2-w^2)^2)).*(c*w*sin(w*t)+m*(w_0^2-w^2)*cos(w*t))
+[Int,flg,fcnt,level] = AdaptSimpson(u, [0, 2*pi], 0.0001, 10)
+clear
+
+%% 4.7
+%% 1b)
+a = 0;
+b = 1;
+syms t x
+f = @(x) (x.^2).*exp(-1*x);
+actual = int(f, x, a, b)
+x = (t+1)/2;
+% dx = 1/2 * dt;
+[c,x_val] = Legendre(2)
+ans = vpa((1/2) * (c(1) * subs(f(x), t, x_val(1)) + c(2) * subs(f(x), t, x_val(2))))
+diff = vpa(abs(actual - ans))
+clear
+
+%% 2b)
+a = 0;
+b = 1;
+syms t x
+f = @(x) (x.^2).*exp(-1*x);
+actual = int(f, x, a, b)
+x = (t+1)/2;
+% dx = 1/2 * dt;
+[c,x_val] = Legendre(3)
+ans = vpa((1/2) * (c(1) * subs(f(x), t, x_val(1)) + c(2) * subs(f(x), t, x_val(2)) + c(3) * subs(f(x), t, x_val(3))))
+diff = vpa(abs(actual - ans))
+clear
+
+
+
+
+
+
+##### SOURCE END #####
+--></body></html>
