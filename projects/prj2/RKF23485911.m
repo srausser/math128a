@@ -1,11 +1,16 @@
 function [Tout,Xout,DXout,info] = RKF23485911(T0,Tfinal,X0,DX0,tol,A,Mu,omega)
     funcs = @vdpode;
     if (omega ~= 0)
-        stepmin = (Tfinal - T0)/(100 * omega);
-        stepmax = (Tfinal - T0)/(10 * omega);
+        if (abs(omega) < 1)
+            stepmin = (Tfinal - T0)/(100000) * abs(omega);
+            stepmax = (Tfinal - T0)/(100) * abs(omega);
+        else
+            stepmin = (Tfinal - T0)/(100000 * abs(omega));
+            stepmax = (Tfinal - T0)/(100 * abs(omega));
+        end
     else
-        stepmin = (Tfinal - T0)/(100);
-        stepmax = (Tfinal - T0)/(10);
+        stepmin = (Tfinal - T0)/(100000);
+        stepmax = (Tfinal - T0)/(100);
     end
 
 
